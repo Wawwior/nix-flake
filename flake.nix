@@ -85,7 +85,7 @@
                 user = home-manager.lib.homeManagerConfiguration {
                     inherit pkgs;
                     modules = [
-                        (./. + "profiles/${systemSettings.profile}/home.nix")
+                        (./. + "/profiles/${systemSettings.profile}/home.nix")
                     ];
                     extraSpecialArgs = {
                         inherit pkgs-stable;

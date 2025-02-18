@@ -17,7 +17,8 @@
 
     gtk.cursorTheme = {
         package = pkgs.quintom-cursor-theme;
-        name = if (config.stylix.polarity == "light") then "Quintom_Ink" else "Quintom_Snow";
+#       name = if (config.stylix.polarity == "light") then "Quintom_Ink" else "Quintom_Snow";
+        name = "Quintom_Snow";
         size = 36;
     };
 

@@ -8,6 +8,16 @@
         (./. + "../../../system/wm/${systemSettings.wm}.nix")
     ];
 
+    nix.buildMachines =[{
+        hostName = "vex-archlinux";
+        sshUser = "remotebuild";
+        sshKey = "/root/.ssh/remotebuild";
+        system = "x86_64-linux";
+    }];
+
+    nix.distributedBuilds = true;
+    nix.settings.builders-use-substitutes = true;
+
     nix.settings.trusted-users = [ "@wheel" ];
 
     nix.settings.substituters = [

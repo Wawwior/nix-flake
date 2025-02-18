@@ -1,9 +1,9 @@
 { inputs, config, pkgs, userSettings, systemSettings, ... }: {
 
     imports = [
-        ../../user/app/neovim
-        (./. + "../../user/wm/${systemSettings.wm}/${systemSettings.wm}.nix")
-        (./. + "../../user/app/${userSettings.browser}/${userSettings.browser}.nix")
+        ../../user/app/neovim/neovim.nix
+        (./. + "/../../user/wm/${systemSettings.wm}/${systemSettings.wm}.nix")
+        (./. + "/../../user/app/${userSettings.browser}/${userSettings.browser}.nix")
         ../../user/app/rio
         ../../user/app/git.nix
     ];
