@@ -4,29 +4,11 @@
         # Include the results of the hardware scan.
         ../../system/hardware-configuration.nix
         ../../system/hardware/boot.nix
-        ../../system/hardware/graphics.nix
-        (./. + "../../../system/wm/${systemSettings.wm}.nix")
+       #../../system/hardware/graphics.nix
+       #(./. + "../../../system/wm/${systemSettings.wm}.nix")
     ];
-
-    nix.buildMachines =[{
-        hostName = "vex-archlinux";
-        sshUser = "remotebuild";
-        sshKey = "/root/.ssh/remotebuild";
-        system = "x86_64-linux";
-    }];
-
-    nix.distributedBuilds = true;
-    nix.settings.builders-use-substitutes = true;
 
     nix.settings.trusted-users = [ "@wheel" ];
-
-    nix.settings.substituters = [
-        "https://nix-community.cachix.org"
-    ];
-
-    nix.settings.trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
 
     nixpkgs.config.allowUnfree = true;
 
@@ -62,7 +44,7 @@
     users.users.${userSettings.username} = {
         isNormalUser = true;
         description = userSettings.name;
-        extraGroups = [ "networkmanager" "wheel" "input" ];
+        extraGroups = [ "wheel" "networkmanager" "input" ];
         packages = [];
         uid = 1000;
     };
@@ -83,14 +65,6 @@
     programs.zsh.enable = true;
 
     fonts.fontDir.enable = true;
-
-    xdg.portal = {
-        enable = true;
-        extraPortals = [
-            pkgs.xdg-desktop-portal
-            pkgs.xdg-desktop-portal-gtk
-        ];
-    };
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;

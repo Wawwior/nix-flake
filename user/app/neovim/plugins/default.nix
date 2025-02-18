@@ -9,8 +9,6 @@
     ];
 
     programs.nixvim = {
-        colorschemes.catppuccin.enable = true;
-
         plugins = {
             lz-n.enable = true;
 

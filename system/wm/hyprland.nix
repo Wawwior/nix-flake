@@ -13,12 +13,13 @@ in {
         enable = true;
         package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         xwayland.enable = true;
-        # portalPackage = pkgs-hyprland.xdg-desktop-portal-hyprland;
+        portalPackage = pkgs-hyprland.xdg-desktop-portal-hyprland;
     };
 
     services.xserver = {
         excludePackages = [ pkgs.xterm ];
     };
+
     services.displayManager.sddm = {
             enable = true;
             wayland.enable = true;

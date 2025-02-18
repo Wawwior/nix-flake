@@ -7,7 +7,6 @@
 
     environment.systemPackages = with pkgs; [
         wayland 
-        waydroid
         (sddm-chili-theme.override {
             themeConfig = {
                 ScreenWidth = 1920;

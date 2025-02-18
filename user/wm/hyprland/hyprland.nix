@@ -10,10 +10,12 @@
     };
 
     home.packages = with pkgs; [
-        eww
         wl-clipboard
         dunst
     ];
+
+    xdg.configFile."hypr/config.conf".source = ./config/config.conf;
+    xdg.configFile."hypr/keybinds.conf".source = ./config/keybinds.conf;
 
     gtk.cursorTheme = {
         package = pkgs.quintom-cursor-theme;
@@ -27,10 +29,11 @@
         package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         settings = {};
         extraConfig = "
-            source=~/.config/hypr/config.conf
-            source=~/.config/hypr/keybinds.conf
+            source=./config.conf
+            source=./keybinds.conf
 
-            exec-once = dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_SESSION_DESKTOP=Hyprland XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland
+            monitor=eDP-1,1920x1080@60,0x0,1
+
             exec-once = hyprctl setcursor " + config.gtk.cursorTheme.name + " " + builtins.toString config.gtk.cursorTheme.size + "
 
             env = XDG_CURRENT_DESKTOP,Hyprland
@@ -45,7 +48,8 @@
 
             $mainMod = Super
 
-            bind = $mainMod, Space, exec, " + userSettings.term + "
+            $term = ${userSettings.term}
+            bind = $mainMod, Space, exec, $term
         ";
         xwayland.enable = true;
         systemd.enable = true;

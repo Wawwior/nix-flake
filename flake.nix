@@ -80,27 +80,26 @@
                 else
                     inputs.home-manager-stable);
 
+            lix = inputs.lix-module;
+
         in {
-            homeConfigurations = {
-                user = home-manager.lib.homeManagerConfiguration {
-                    inherit pkgs;
-                    modules = [
-                        (./. + "/profiles/${systemSettings.profile}/home.nix")
-                    ];
-                    extraSpecialArgs = {
-                        inherit pkgs-stable;
-                        inherit systemSettings;
-                        inherit userSettings;
-                        inherit inputs;
-                    };
-                };
-            };
-            
             nixosConfigurations = {
                 system = lib.nixosSystem {
                     system = systemSettings.system;
                     modules = [
                         (./. + "/profiles/${systemSettings.profile}/configuration.nix")
+                        lix.nixosModules.default
+                        home-manager.nixosModules.home-manager {
+                            home-manager.extraSpecialArgs = { 
+                                inherit pkgs-stable; 
+                                inherit systemSettings;
+                                inherit userSettings;
+                                inherit inputs;
+                            };
+                            home-manager.users."${userSettings.username}" = {
+                                imports = [ (./. + "/profiles/${systemSettings.profile}/home.nix") ];
+                            };
+                        }
                     ];
                     specialArgs = {
                         inherit pkgs-stable;
@@ -145,6 +144,11 @@
         stylix.url = "github:danth/stylix";
 
         rust-overlay.url = "github:oxalica/rust-overlay";
+
+        lix-module = {
+            url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
     };
 }
