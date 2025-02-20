@@ -8,7 +8,8 @@
     ];
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs =
+    inputs@{ self, ... }:
     let
 
       systemSettings = {
@@ -32,11 +33,10 @@
       userSettings = {
         userName = "wawwior";
         name = "Wawwior";
-        browser = "zen-browser";
+        browser = "zen";
         term = "kitty";
         editor = "hx";
-        passHash =
-          "$6$/IfaUKyDgQ9EW21b$U9gQD3xBh/w2.E8FisR8.kYKejtrSWnKhfn9FmV0r.ZMca.zElCLV3kCgQwmpzgW0VfcQmIrD.9AyCFQeupSf/";
+        passHash = "$6$/IfaUKyDgQ9EW21b$U9gQD3xBh/w2.E8FisR8.kYKejtrSWnKhfn9FmV0r.ZMca.zElCLV3kCgQwmpzgW0VfcQmIrD.9AyCFQeupSf/";
       };
 
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -58,19 +58,16 @@
 
       pkgs = (if systemSettings.unstable then pkgs-unstable else pkgs-stable);
 
-      lib = (if systemSettings.unstable then
-        inputs.nixpkgs.lib
-      else
-        inputs.nixpkgs-stable.lib);
+      lib = (if systemSettings.unstable then inputs.nixpkgs.lib else inputs.nixpkgs-stable.lib);
 
-      home-manager = (if systemSettings.unstable then
-        inputs.home-manager-unstable
-      else
-        inputs.home-manager-stable);
+      home-manager = (
+        if systemSettings.unstable then inputs.home-manager-unstable else inputs.home-manager-stable
+      );
 
       lix = inputs.lix-module-unstable;
 
-    in {
+    in
+    {
       nixosConfigurations = rec {
         system = lib.nixosSystem {
           inherit pkgs;
@@ -87,8 +84,7 @@
                 inherit inputs;
               };
               home-manager.users."${userSettings.userName}" = {
-                imports =
-                  [ (./. + "/profiles/${systemSettings.profile}/home.nix") ];
+                imports = [ (./. + "/profiles/${systemSettings.profile}/home.nix") ];
               };
             }
           ];
@@ -132,8 +128,7 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     lix-module-unstable = {
-      url =
-        "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

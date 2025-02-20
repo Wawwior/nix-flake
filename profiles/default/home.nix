@@ -1,12 +1,15 @@
-{ config, pkgs, userSettings, systemSettings, ... }: {
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
+{
 
   imports = [
-    (./. + "/../../user/display/${systemSettings.display}.nix")
-    (./. + "/../../user/app/browsers/${userSettings.browser}.nix")
-    (./. + "/../../user/app/${userSettings.term}.nix")
-    ../../user/app/git.nix
-    ../../user/app/helix.nix
     ../../user/zsh.nix
+    ../../user/apps
+    ../../user/display
   ];
 
   programs.home-manager.enable = true;

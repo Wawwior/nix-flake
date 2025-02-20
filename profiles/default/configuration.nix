@@ -1,25 +1,34 @@
-{ pkgs, lib, systemSettings, userSettings, ... }: {
+{
+  pkgs,
+  lib,
+  systemSettings,
+  userSettings,
+  ...
+}:
+{
 
   imports = [
     # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
-    ../../system/hardware/boot.nix
-    ../../system/hardware/graphics.nix
-    (./. + "../../../system/display/${systemSettings.display}.nix")
+    ../../system/hardware
+    ../../system/display
     ../../system/style/stylix.nix
-    ../../system/hardware/battery.nix
   ];
 
   nix.settings.trusted-users = [ "@wheel" ];
 
   nix.settings.substituters = [ "https://hyprland.cachix.org" ];
 
-  nix.settings.trusted-public-keys =
-    [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+  nix.settings.trusted-public-keys = [
+    "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+  ];
 
   home-manager.backupFileExtension = "backup";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Set your time zone.
   time.timeZone = systemSettings.timeZone;
@@ -45,7 +54,11 @@
   users.users.${userSettings.userName} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "wheel" "networkmanager" "input" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "input"
+    ];
     hashedPassword = userSettings.passHash;
     packages = [ ];
     uid = 1000;
@@ -54,7 +67,21 @@
   networking.hostName = systemSettings.hostName;
   networking.networkmanager.enable = true;
 
-  environment.systemPackages = with pkgs; [ vim zsh git ripgrep powertop ];
+  environment.systemPackages = with pkgs; [
+    vim
+    zsh
+    git
+    ripgrep
+    powertop
+    gnupg
+  ];
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-tty;
+    enableSSHSupport = true;
+  };
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -64,7 +91,10 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   programs.nh = {
