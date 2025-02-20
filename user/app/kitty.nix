@@ -1,5 +1,4 @@
 {
-    programs.kitty = {
-        enable = true;
-    };
+  # TODO: kitty font
+  programs.kitty = { enable = true; };
 }

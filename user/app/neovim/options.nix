@@ -14,13 +14,12 @@
         };
 
         opts = {
-            
+
             updatetime = 100;
 
             number = true;
             showmode = false;
-            mouse = "a";
-            mousemodel = "extend";
+            mouse = "";
             swapfile = false;
             undofile = true;
             ignorecase = true;
