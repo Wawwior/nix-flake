@@ -8,7 +8,7 @@
 {
 
   options = {
-    zen.enable = lib.mkEnableOption "enables zen browser";
+    zen.enable = lib.mkEnableOption "zen browser";
   };
 
   config = lib.mkIf config.zen.enable {

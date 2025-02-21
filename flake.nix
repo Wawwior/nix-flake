@@ -24,9 +24,11 @@
         bootMode = "systemd";
         bootMountPath = "/boot";
         grubDevice = "nodev";
-        gpuType = "nvidia";
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:2:0:0";
+        graphics = {
+          type = "nvidia";
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:2:0:0";
+        };
         display = "hyprland";
       };
 
@@ -65,6 +67,8 @@
       );
 
       lix = inputs.lix-module-unstable;
+
+      sops = inputs.sops-nix;
 
     in
     {
@@ -133,6 +137,8 @@
     };
 
     nixd.url = "github:nix-community/nixd";
+
+    sops-nix.url = "github:Mic92/sops-nix";
 
   };
 }

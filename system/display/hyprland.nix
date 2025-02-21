@@ -13,7 +13,7 @@ in
 {
 
   options = {
-    hyprland.enable = lib.mkEnableOption "enables hyprland";
+    hyprland.enable = lib.mkEnableOption "hyprland";
   };
 
   imports = [

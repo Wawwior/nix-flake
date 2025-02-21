@@ -1,6 +1,6 @@
 {
+  inputs,
   pkgs,
-  lib,
   systemSettings,
   userSettings,
   ...
@@ -29,6 +29,8 @@
     "nix-command"
     "flakes"
   ];
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # Set your time zone.
   time.timeZone = systemSettings.timeZone;

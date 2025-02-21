@@ -2,7 +2,7 @@
 {
 
   options = {
-    kitty.enable = lib.mkEnableOption "enables kitty terminal";
+    kitty.enable = lib.mkEnableOption "kitty terminal";
   };
 
   config = lib.mkIf config.kitty.enable {
