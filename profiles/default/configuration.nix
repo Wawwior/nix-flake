@@ -76,6 +76,8 @@
     ripgrep
     powertop
     gnupg
+    lm_sensors
+    systemctl-tui
   ];
 
   services.pcscd.enable = true;

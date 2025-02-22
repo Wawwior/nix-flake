@@ -11,11 +11,11 @@
   stylix = {
     enable = true;
 
-    targets.grub.enable = false;
-
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     image = ./wallpaper.png;
+
+    polarity = "dark";
 
     cursor = {
       package = pkgs.bibata-cursors;
@@ -23,7 +23,6 @@
       size = 24;
     };
 
-    # TODO: kitty font
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.dejavu-sans-mono;
@@ -36,5 +35,4 @@
       serif = config.stylix.fonts.sansSerif;
     };
   };
-
 }

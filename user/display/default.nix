@@ -2,7 +2,7 @@
 {
 
   imports = [
-    ./hyprland/hyprland.nix
+    ./hyprland
   ];
 
   hyprland.enable = lib.mkDefault (systemSettings.display == "hyprland");

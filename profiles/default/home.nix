@@ -23,14 +23,11 @@
 
     packages = with pkgs; [
 
-      # system monitor
-      btop
-
       # cli
+      btop
       eza
       fastfetch
       hyfetch
-      file-rename
       lazygit
 
       # lsp
@@ -38,7 +35,14 @@
 
       # media
       spotify
+
+      # productivity
+      obsidian
     ];
+  };
+
+  programs.bat = {
+    enable = true;
   };
 
   xdg.enable = true;

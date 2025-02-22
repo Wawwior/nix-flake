@@ -8,11 +8,17 @@
 }:
 {
 
+  imports = [
+    ../waybar.nix
+  ];
+
   options = {
     hyprland.enable = lib.mkEnableOption "hyprland";
   };
 
   config = lib.mkIf config.hyprland.enable {
+
+    waybar.enable = true;
 
     home.sessionVariables = {
       NIXOS_OZONE_WL = 1;
