@@ -10,7 +10,7 @@
     ./kitty.nix
     ./helix.nix
     ./zen.nix
-    ./lf.nix
+    ./yazi.nix
   ];
 
   kitty.enable = lib.mkDefault (userSettings.term == "kitty");

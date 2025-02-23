@@ -19,6 +19,7 @@
   home = {
     username = userSettings.userName;
     homeDirectory = "/home/${userSettings.userName}";
+    # DONT_CHANGE:
     stateVersion = "24.11";
 
     packages = with pkgs; [
@@ -38,6 +39,9 @@
 
       # productivity
       obsidian
+
+      # communication
+      signal-desktop
     ];
   };
 

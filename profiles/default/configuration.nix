@@ -108,10 +108,16 @@
     flake = "/home/${userSettings.userName}/.nixos";
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   # Do not change
+  # DONT_CHANGE:
   system.stateVersion = "24.11";
 
 }

@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   config,
+  userSettings,
   ...
 }:
 {
@@ -33,6 +34,15 @@
         name = "Noto Sans";
       };
       serif = config.stylix.fonts.sansSerif;
+    };
+  };
+  home-manager.users."${userSettings.userName}".stylix = {
+    image = ../../system/style/wallpaper.png;
+    iconTheme = {
+      enable = true;
+      package = pkgs.adwaita-icon-theme;
+      dark = "Adwaita";
+      light = "Adwaita";
     };
   };
 }

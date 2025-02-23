@@ -9,6 +9,7 @@
 {
 
   imports = [
+    ../wofi.nix
     ../waybar.nix
   ];
 
@@ -57,9 +58,15 @@
         env = CLUTTER_BACKEND,wayland
 
         $mainMod = Super
+        $run = wofi --show run
+        $drun = wofi --show drun
 
         $term = ${userSettings.term}
         bind = $mainMod, Space, exec, $term
+
+
+        bind = $mainMod, A, exec, $drun # launch application launcher
+        bind = $mainMod, W, exec, $run # launch runner
 
         cursor {
             no_hardware_cursors = 1

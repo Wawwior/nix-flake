@@ -35,6 +35,9 @@
       style =
         # css
         ''
+          * {
+            font-family: "DejaVuSansM Nerd Font Mono";
+          }
 
         '';
     };

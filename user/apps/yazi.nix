@@ -1,6 +1,6 @@
 {
 
-  programs.lf = {
+  programs.yazi = {
     enable = true;
   };
 
