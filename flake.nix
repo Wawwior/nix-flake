@@ -21,6 +21,7 @@
         locale = "en_US.utf-8";
         extraLocale = "de_DE.utf-8";
         layout = "de";
+        variant = "nodeadkeys";
         bootMode = "systemd";
         bootMountPath = "/boot";
         grubDevice = "nodev";
@@ -29,7 +30,12 @@
           intelBusId = "PCI:0:2:0";
           nvidiaBusId = "PCI:2:0:0";
         };
-        display = "hyprland";
+        display = {
+          manager = "hyprland";
+          monitor = "eDP-1";
+          resolution = "1920x1080@60";
+          scale = "1.25";
+        };
       };
 
       userSettings = {

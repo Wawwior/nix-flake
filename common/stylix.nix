@@ -9,12 +9,16 @@
 
   imports = [ inputs.stylix.nixosModules.stylix ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.dejavu-sans-mono
+  ];
+
   stylix = {
     enable = true;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-    image = ./wallpaper.png;
+    image = ./.;
 
     polarity = "dark";
 
@@ -37,7 +41,14 @@
     };
   };
   home-manager.users."${userSettings.userName}".stylix = {
-    image = ../../system/style/wallpaper.png;
+
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+
+    image = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/os/nix-black-4k.png";
+      sha256 = "sha256-HRZYeKDmfA53kb3fZxuNWvR8cE96tLrqPZhX4+z4lZA=";
+    };
+
     iconTheme = {
       enable = true;
       package = pkgs.adwaita-icon-theme;

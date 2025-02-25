@@ -24,22 +24,24 @@
             "memory"
             "cpu"
             "temperature"
+            "battery"
           ];
 
           temperature = {
             hwmon-path-abs = "/sys/devices/platform/coretemp.0/hwmon";
             input-filename = "temp1_input";
+            format = "{temperatureC}°C";
           };
         }
       ];
-      style =
-        # css
-        ''
+      style = lib.mkAfter ''
+        /* css */
           * {
             font-family: "DejaVuSansM Nerd Font Mono";
+            font-size: 13px;
           }
 
-        '';
+      '';
     };
   };
 }

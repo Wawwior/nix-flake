@@ -1,15 +1,25 @@
-{ systemSettings, config, pkgs, ... }: {
+{
+  systemSettings,
+  config,
+  pkgs,
+  ...
+}:
+{
 
-  imports = [ ./pipewire.nix ./fonts.nix ];
+  imports = [
+    ./pipewire.nix
+  ];
 
-  environment.systemPackages = with pkgs; [ wayland wl-clipboard ];
+  environment.systemPackages = with pkgs; [
+    wayland
+    wl-clipboard
+  ];
 
   services.xserver = {
     enable = true;
     xkb = {
       layout = systemSettings.layout;
-      variant = "";
-      options = "caps:escape";
+      variant = systemSettings.variant;
     };
   };
 

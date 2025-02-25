@@ -5,6 +5,6 @@
     ./hyprland
   ];
 
-  hyprland.enable = lib.mkDefault (systemSettings.display == "hyprland");
+  hyprland.enable = lib.mkDefault (systemSettings.display.manager == "hyprland");
 
 }

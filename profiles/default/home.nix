@@ -7,7 +7,7 @@
 {
 
   imports = [
-    ../../user/zsh.nix
+    ../../user/shell.nix
     ../../user/apps
     ../../user/display
   ];
@@ -33,12 +33,16 @@
 
       # lsp
       nixd
+      jdt-language-server
 
       # media
       spotify
 
       # productivity
       obsidian
+
+      # fonts
+      nerd-fonts.dejavu-sans-mono
 
       # communication
       signal-desktop

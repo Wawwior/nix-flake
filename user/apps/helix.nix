@@ -8,6 +8,7 @@
 
   programs.helix = {
     enable = true;
+    defaultEditor = true;
     settings = {
       editor = {
         mouse = false;
@@ -43,8 +44,14 @@
                 expr = "(builtins.getFlake \"/home/${userSettings.userName}/.nixos\").nixosConfigurations.${systemSettings.hostName}.options";
               };
             };
-
           };
+        };
+        jdtls = {
+          command = "jdtls";
+          args = [
+            "-data"
+            "/home/${userSettings.userName}/.cache/jdtls/workspace"
+          ];
         };
       };
       language = [
@@ -53,6 +60,21 @@
           auto-format = true;
           formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
           language-servers = [ "nixd" ];
+        }
+        {
+          name = "java";
+          scope = "source.java";
+          roots = [
+            "pom.xml"
+            "build.gradle"
+          ];
+          language-servers = [ "jdtls" ];
+        }
+        {
+          name = "css";
+          scope = "source.css";
+          injection-regex = "css";
+          file-types = [ "css" ];
         }
       ];
     };
