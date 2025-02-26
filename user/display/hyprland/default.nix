@@ -115,13 +115,12 @@
         ];
 
         bind = [
-          "$mainMod, Q, killactive"
-          "$mainMod, F, togglefloating"
+          "$mainMod, q, killactive"
           "$mainMod, Return, fullscreen"
 
           "$mainMod, Space, exec, $term"
-          "$mainMod, A, exec, $drun"
-          "$mainMod, W, exec, $run"
+          "$mainMod, a, exec, $drun"
+          "$mainMod, w, exec, $run"
 
           "$mainMod, h, movefocus, l"
           "$mainMod, l, movefocus, r"
@@ -154,11 +153,16 @@
           "$mainMod+Shift, l, movewindow, r"
           "$mainMod+Shift, k, movewindow, u"
           "$mainMod+Shift, j, movewindow, d"
+          "$mainMod+Ctrl, h, resizeactive, -50 0"
+          "$mainMod+Ctrl, l, resizeactive, 50 0"
+          "$mainMod+Ctrl, k, resizeactive, 0 -50"
+          "$mainMod+Ctrl, j, resizeactive, 0 50"
 
           "$mainMod+Shift, Tab, movetoworkspace, special"
           "$mainMod, Tab, togglespecialworkspace"
 
-          "bind = $mainMod, o, togglesplit"
+          "$mainMod, i, togglefloating"
+          "$mainMod, o, togglesplit"
 
           "$mainMod+Alt, 1, movetoworkspacesilent, 1"
           "$mainMod+Alt, 2, movetoworkspacesilent, 2"

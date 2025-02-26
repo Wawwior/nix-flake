@@ -74,6 +74,7 @@
       git
       ripgrep
       powertop
+      gradle
       gnupg
       lm_sensors
       systemctl-tui

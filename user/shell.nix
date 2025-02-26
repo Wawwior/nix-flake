@@ -24,6 +24,7 @@
     shellAliases = {
       os = "nh os";
       fetch = "hyfetch";
+      os-dry = "(){ sudo nixos-rebuild dry-activate --flake ~/.nixos#$1 ;}";
     };
 
     plugins = [
