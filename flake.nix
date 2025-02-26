@@ -10,33 +10,27 @@
 
       lix = inputs.lix-module;
 
-      mkHost =
-        host: isDarwin:
-        let
-          mkSys = if isDarwin then inputs.nix-darwin.lib.darwinSystem else lib.nixosSystem;
-        in
-        {
-          ${host} = mkSys {
-            specialArgs = {
-              inherit inputs outputs;
-            };
-            modules = [
-              ./hosts/${if isDarwin then "darwin" else "nixos"}/${host}
-              lix.nixosModules.default
-            ];
-
-            lib = nixpkgs.lib.extend (self: super: { custom = import ./lib { inherit (nixpkgs) lib; }; });
+      mkHost = host: {
+        ${host} = lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
           };
+          modules = [
+            ./hosts/nixos/${host}
+            lix.nixosModules.default
+          ];
+
+          lib = nixpkgs.lib.extend (self: super: { custom = import ./lib { inherit (nixpkgs) lib; }; });
         };
+      };
 
-      mkHostConfigs =
-        hosts: isDarwin: lib.foldl (acc: set: acc // set) { } (lib.map (host: mkHost host isDarwin) hosts);
+      mkHostConfigs = hosts: lib.foldl (acc: set: acc // set) { } (lib.map (host: mkHost host) hosts);
 
-      readHosts = folder: lib.attrNames (builtins.readDir ./hosts/${folder});
+      hosts = lib.attrNames (builtins.readDir ./hosts/nixos);
 
     in
     {
-      nixosConfigurations = mkHostConfigs (readHosts "nixos") false;
+      nixosConfigurations = mkHostConfigs hosts;
     };
 
   inputs = {
@@ -47,6 +41,8 @@
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    hardware.url = "github:nixos/nixos-hardware";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,5 +52,7 @@
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 }

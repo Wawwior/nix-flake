@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  root = lib.path.append ../.;
+  fromTop = lib.path.append ../.;
   scanPaths =
     path:
     builtins.map (f: (path + "/${f}")) (

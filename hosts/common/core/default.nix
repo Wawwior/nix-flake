@@ -1,8 +1,32 @@
-{ lib, ... }:
+{
+  inputs,
+  lib,
+  ...
+}:
 {
   imports = lib.flatten [
-    (map lib.custom.root [
+    inputs.home-manager.nixosModules.home-manager
+
+    ./sops.nix
+
+    (map lib.custom.fromTop [
       "modules/common"
+      "hosts/common/users/primary"
     ])
   ];
+
+  hostSpec = {
+    username = "wawwior";
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+  };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
 }
