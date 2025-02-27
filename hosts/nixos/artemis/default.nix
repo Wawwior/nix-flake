@@ -12,7 +12,7 @@
     (lib.custom.fromTop "hosts/common/disks/ext4-simple.nix")
     {
       _module.args = {
-        disk = "dev/nvme0n1";
+        disk = "/dev/nvme0n1";
         withSwap = true;
         swapSize = "16";
       };
