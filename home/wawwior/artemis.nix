@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ ... }:
 {
-  imports = lib.flatten [
+  imports = [
     ./common/core
     ./common/optional/display
     ./common/optional/browsers/zen.nix

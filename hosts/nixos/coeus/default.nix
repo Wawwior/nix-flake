@@ -12,9 +12,9 @@
     (lib.custom.fromTop "hosts/common/disks/ext4-simple.nix")
     {
       _module.args = {
-        disk = "dev/nvme0n1";
+        disk = "dev/vda";
         withSwap = true;
-        swapSize = "16";
+        swapSize = "2";
       };
     }
 
@@ -28,23 +28,19 @@
       "hosts/common/optional/stylix/catppuccin-mocha"
 
       "hosts/common/optional/audio.nix"
-      "hosts/common/optional/sddm.nix"
-      "hosts/common/optional/hyprland.nix"
     ])
   ];
 
-  facter.reportPath = ./facter.json;
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   hostSpec = {
-    hostName = "artemis";
+    hostName = "coeus";
   };
 
   networking = {
     networkmanager.enable = true;
     enableIPv6 = true;
   };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   boot = {
     loader = {
