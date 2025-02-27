@@ -27,6 +27,11 @@ in
     ];
   };
 
+  users.users.root = {
+    shell = pkgs.zsh;
+    hashedPasswordFile = config.sops.secrets."passwords/root".path;
+  };
+
   users.mutableUsers = false;
 
   home-manager = {
