@@ -1,58 +1,32 @@
+# Do not modify! This file is generated.
+
 {
-  description = "system configuration";
-
-  outputs =
-    inputs@{ self, nixpkgs, ... }:
-    let
-
-      inherit (self) outputs;
-      inherit (nixpkgs) lib;
-
-      lix = inputs.lix-module;
-
-      mkHost = host: {
-        ${host} = lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            ./hosts/nixos/${host}
-            lix.nixosModules.default
-          ];
-
-          lib = nixpkgs.lib.extend (self: super: { custom = import ./lib { inherit (nixpkgs) lib; }; });
-        };
-      };
-
-      mkHostConfigs = hosts: lib.foldl (acc: set: acc // set) { } (lib.map (host: mkHost host) hosts);
-
-      hosts = lib.attrNames (builtins.readDir ./hosts/nixos);
-
-    in
-    {
-      nixosConfigurations = mkHostConfigs hosts;
-    };
-
+  description = "Nix Flake";
   inputs = {
-
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    hardware.url = "github:nixos/nixos-hardware";
-
+    disko = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/disko";
+    };
+    flakegen.url = "github:jorsn/flakegen";
     home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    hyprland.url = "github:hyprwm/Hyprland";
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
     };
-
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
+    stylix.url = "github:danth/stylix";
+    zen-browser = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:0xc000022070/zen-browser-flake";
+    };
   };
+  outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
 }

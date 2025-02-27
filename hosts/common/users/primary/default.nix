@@ -7,6 +7,7 @@
 }:
 let
   hostSpec = config.hostSpec;
+  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {
 
@@ -15,10 +16,14 @@ in
     home = hostSpec.home;
     isNormalUser = true;
     shell = pkgs.zsh;
-    hashedPasswordFile = config.sops.secrets.primary.path;
+    hashedPasswordFile = config.sops.secrets."passwords/primary".path;
 
     extraGroups = lib.flatten [
       "wheel"
+      (ifTheyExist [
+        "networkmanager"
+        "input"
+      ])
     ];
   };
 

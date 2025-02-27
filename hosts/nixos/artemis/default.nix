@@ -1,35 +1,50 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  ...
+}:
 {
   imports = lib.flatten [
-    ./hardware-configuration.nix
 
-    inputs.hardware.nixosModules.common-cpu-intel
-    inputs.hardware.nixosModules.common-gpu-nvidia
-    inputs.hardware.nixosModules.common-pc-laptop
-    inputs.hardware.nixosModules.common-pc-laptop-ssd
+    inputs.nixos-facter-modules.nixosModules.facter
+
+    inputs.disko.nixosModules.disko
+    (lib.custom.fromTop "hosts/common/disks/ext4-simple.nix")
+    {
+      _module.args = {
+        disk = "dev/nvme0n1";
+        withSwap = true;
+        swapSize = 16;
+      };
+    }
 
     (map lib.custom.fromTop [
       "hosts/common/core"
       "hosts/common/optional/services/openssh.nix"
+      "hosts/common/optional/services/cpufreq.nix"
+      "hosts/common/optional/services/thermald.nix"
+
+      # PONDER_THE_ORB: is this the best way to do this?
+      "hosts/common/optional/stylix/catppuccin-mocha"
+
+      "hosts/common/optional/audio.nix"
+      "hosts/common/optional/sddm.nix"
+      "hosts/common/optional/hyprland.nix"
     ])
   ];
 
+  facter.reportPath = ./facter.json;
+
   hostSpec = {
     hostName = "artemis";
-  };
-
-  hardware.nvidia = {
-    open = false;
-    prime = {
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:2:0:0";
-    };
   };
 
   networking = {
     networkmanager.enable = true;
     enableIPv6 = true;
   };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   boot = {
     loader = {
@@ -41,4 +56,13 @@
   };
 
   system.stateVersion = "24.11";
+
+  console.useXkbConfig = true;
+
+  services.xserver = {
+    xkb = {
+      layout = "de";
+      variant = "nodeadkeys";
+    };
+  };
 }

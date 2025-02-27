@@ -1,6 +1,9 @@
 {
   inputs,
+  outputs,
+  pkgs,
   lib,
+  config,
   ...
 }:
 {
@@ -8,6 +11,10 @@
     inputs.home-manager.nixosModules.home-manager
 
     ./sops.nix
+    ./gnupg.nix
+    ./nh.nix
+    ./kernel.nix
+    ./nix-conf.nix
 
     (map lib.custom.fromTop [
       "modules/common"
@@ -19,14 +26,27 @@
     username = "wawwior";
   };
 
+  networking.hostName = config.hostSpec.hostName;
+
+  environment.systemPackages = [ pkgs.openssh ];
+
+  home-manager.backupFileExtension = "bk";
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.default
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  # basic shell for root
   programs.zsh = {
     enable = true;
     enableCompletion = true;
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "Europe/Berlin";
 }
