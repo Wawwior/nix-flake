@@ -9,4 +9,9 @@
     ./common/optional/media
     ./common/optional/tools
   ];
+
+  display = {
+    name = "eDP-1";
+    scale = 1.25;
+  };
 }

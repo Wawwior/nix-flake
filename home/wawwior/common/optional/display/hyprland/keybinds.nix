@@ -2,10 +2,12 @@
 {
   wayland.windowManager.hyprland.settings = {
 
+    "$mainMod" = "Super";
+
     bind =
       let
         terminal = config.home.sessionVariables.TERM;
-        runner = "wofi -show drun";
+        runner = "wofi --show drun";
       in
       [
         "$mainMod, q, killactive"
@@ -19,16 +21,16 @@
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
 
-        "bind = $mainMod, 1, workspace, 1"
-        "bind = $mainMod, 2, workspace, 2"
-        "bind = $mainMod, 3, workspace, 3"
-        "bind = $mainMod, 4, workspace, 4"
-        "bind = $mainMod, 5, workspace, 5"
-        "bind = $mainMod, 6, workspace, 6"
-        "bind = $mainMod, 7, workspace, 7"
-        "bind = $mainMod, 8, workspace, 8"
-        "bind = $mainMod, 9, workspace, 9"
-        "bind = $mainMod, 0, workspace, 10"
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, workspace, 10"
 
         "$mainMod+Shift, 1, movetoworkspace, 1"
         "$mainMod+Shift, 2, movetoworkspace, 2"

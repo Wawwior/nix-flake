@@ -17,6 +17,7 @@
 
     (map lib.custom.fromTop [
       "modules/common/host-spec.nix"
+      "modules/home"
     ])
   ];
 
@@ -44,9 +45,4 @@
     TERM = "kitty";
     BROWSER = "zen";
   };
-
-  home.packages = with pkgs; [
-    ripgrep
-  ];
-
 }

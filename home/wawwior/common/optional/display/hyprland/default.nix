@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }:
 {
@@ -15,6 +16,8 @@
     systemd.enable = true;
     xwayland.enable = true;
     settings = {
+
+      monitor = "${config.display.name},${config.display.mode},0x0,${builtins.toString config.display.scale}";
 
       general = {
         gaps_in = 2;
