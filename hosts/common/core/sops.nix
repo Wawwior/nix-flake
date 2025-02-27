@@ -12,13 +12,16 @@
   sops = {
     defaultSopsFile = lib.custom.fromTop "./.secrets.yaml";
 
-    age.keyFile = "${config.hostSpec.home}/.config/sops/age/keys.txt";
+    age.keyFile = "/var/lib/sops-nix/key.txt";
 
     secrets = {
       "passwords/primary" = {
+        neededForUsers = true;
         owner = config.hostSpec.username;
       };
-      "passwords/root" = { };
+      "passwords/root" = {
+        neededForUsers = true;
+      };
       nix-github-token = { };
     };
   };
