@@ -16,7 +16,7 @@ in
     home = hostSpec.home;
     isNormalUser = true;
     shell = pkgs.zsh;
-    hashedPasswordFile = config.sops.secrets."passwords/primary".path;
+    hashedPasswordFile = config.sops.secrets."passwords/${hostSpec.username}".path;
 
     extraGroups = lib.flatten [
       "wheel"
@@ -38,20 +38,26 @@ in
     extraSpecialArgs = {
       inherit inputs pkgs hostSpec;
     };
-    users.${hostSpec.username}.imports = lib.flatten [
-      (
-        { config, ... }:
-        import (lib.custom.fromTop "home/${hostSpec.username}/${hostSpec.hostName}.nix") {
-          inherit
-            inputs
-            pkgs
-            lib
-            config
-            hostSpec
-            ;
-        }
-      )
-    ];
+    users.${hostSpec.username} = {
+      home = {
+        username = config.hostSpec.username;
+        homeDirectory = config.hostSpec.home;
+        stateVersion = "24.11";
+      };
+      imports = lib.flatten [
+        (
+          { config, ... }:
+          import (lib.custom.fromTop "home/${hostSpec.username}/${hostSpec.hostName}.nix") {
+            inherit
+              inputs
+              pkgs
+              lib
+              config
+              hostSpec
+              ;
+          }
+        )
+      ];
+    };
   };
-
 }

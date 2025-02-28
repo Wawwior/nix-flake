@@ -10,19 +10,22 @@
   ];
 
   sops = {
-    defaultSopsFile = lib.custom.fromTop "./.secrets.yaml";
+    defaultSopsFile = lib.custom.fromTop "./secrets.yaml";
+    validateSopsFiles = false;
 
-    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
 
     secrets = {
-      "passwords/primary" = {
+      "passwords/wawwior" = {
         neededForUsers = true;
-        owner = config.hostSpec.username;
       };
       "passwords/root" = {
         neededForUsers = true;
       };
-      nix-github-token = { };
     };
   };
 }

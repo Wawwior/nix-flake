@@ -15,10 +15,11 @@
       ];
     };
 
-    extraOptions = ''
-      !include ${config.sops.secrets.nix-github-token.path}
-      builders-use-substitutes = true
-    '';
+    extraOptions =
+      # !include ${config.sops.secrets.nix-github-token.path}
+      ''
+        builders-use-substitutes = true
+      '';
 
     buildMachines = [
       {

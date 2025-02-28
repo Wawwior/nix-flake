@@ -60,17 +60,10 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      home-manager =
-        if unstable then
-          {
-            url = "github:nix-community/home-manager";
-            inputs.nixpkgs.follows = "nixpkgs-unstable";
-          }
-        else
-          {
-            url = "github:nix-community/home-manager/release-24.11";
-            inputs.nixpkgs.follows = "nixpkgs-stable";
-          };
+      home-manager = {
+        url = "github:nix-community/home-manager" + (if unstable then "" else "/release-24.11");
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
       sops-nix.url = "github:Mic92/sops-nix";
 

@@ -9,7 +9,7 @@
     };
     flakegen.url = "github:jorsn/flakegen";
     home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
     hyprland.url = "github:hyprwm/Hyprland";

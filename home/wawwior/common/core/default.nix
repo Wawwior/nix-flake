@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   hostSpec,
   ...
@@ -21,16 +20,23 @@
     ])
   ];
 
-  home = {
-    stateVersion = "24.11";
-  };
-
   inherit hostSpec;
+
+  programs.home-manager.enable = true;
+
+  home.sessionVariables = {
+    FLAKE = "$HOME/.nixos";
+    SHELL = "zsh";
+    EDITOR = "hx";
+    TERM = "kitty";
+    BROWSER = "zen";
+  };
 
   xdg.enable = true;
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+    desktop = "${config.home.homeDirectory}/.desktop";
     music = "${config.home.homeDirectory}/media/audio";
     videos = "${config.home.homeDirectory}/media/video";
     pictures = "${config.home.homeDirectory}/media/images";
@@ -39,10 +45,4 @@
   };
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
-
-  home.sessionVariables = {
-    EDITOR = "hx";
-    TERM = "kitty";
-    BROWSER = "zen";
-  };
 }
