@@ -13,6 +13,7 @@
     ./helix.nix
     ./kitty.nix
     ./tools
+    ./ssh.nix
 
     (map lib.custom.fromTop [
       "modules/common/host-spec.nix"

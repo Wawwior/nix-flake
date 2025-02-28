@@ -15,6 +15,7 @@
     ./nh.nix
     ./kernel.nix
     ./nix-conf.nix
+    ./ssh.nix
 
     (map lib.custom.fromTop [
       "modules/common"
