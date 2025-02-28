@@ -38,6 +38,10 @@ in
     extraSpecialArgs = {
       inherit inputs pkgs hostSpec;
     };
+    users.root = {
+      programs.zsh.enable = true;
+      home.stateVersion = "24.11";
+    };
     users.${hostSpec.username} = {
       home = {
         username = config.hostSpec.username;

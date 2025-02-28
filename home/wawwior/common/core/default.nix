@@ -25,8 +25,6 @@
   programs.home-manager.enable = true;
 
   home.sessionVariables = {
-    FLAKE = "$HOME/.nixos";
-    SHELL = "zsh";
     EDITOR = "hx";
     TERM = "kitty";
     BROWSER = "zen";
