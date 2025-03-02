@@ -28,7 +28,6 @@
   home.sessionVariables = {
     EDITOR = "hx";
     TERM = "kitty";
-    BROWSER = "zen";
   };
 
   xdg.enable = true;

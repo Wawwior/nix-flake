@@ -19,6 +19,11 @@
 
       monitor = "${config.display.name},${config.display.mode},0x0,${builtins.toString config.display.scale}";
 
+      xwayland = {
+        force_zero_scaling = true;
+        use_nearest_neighbor = false;
+      };
+
       general = {
         gaps_in = 2;
         gaps_out = 4;
@@ -52,7 +57,7 @@
       };
 
       misc = {
-
+        force_default_wallpaper = 1;
       };
 
       input = {

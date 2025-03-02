@@ -15,6 +15,7 @@
           insert = "bar";
           select = "underline";
         };
+        color-modes = true;
       };
       keys = {
         normal = {

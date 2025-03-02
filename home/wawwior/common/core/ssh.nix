@@ -1,21 +1,20 @@
 { config, ... }:
 {
-  programs.ssh = {
+  programs.ssh =
+    let
+      authKey = "${config.home.homeDirectory}/.ssh/id_auth_ed25519_key";
+    in
+    {
 
-    enable = true;
+      enable = true;
 
-    controlMaster = "auto";
-    controlPath = "${config.home.homeDirectory}/.ssh/sockets/S.%r@%h:%p";
-    controlPersist = "20m";
+      controlMaster = "auto";
+      controlPath = "${config.home.homeDirectory}/.ssh/sockets/S.%r@%h:%p";
+      controlPersist = "20m";
 
-    addKeysToAgent = "yes";
+      addKeysToAgent = "yes";
 
-    matchBlocks =
-      let
-        authKey = "${config.home.homeDirectory}/.ssh/id_auth_ed25519_key";
-      in
-      {
-
+      matchBlocks = {
         "git" = {
           host = "github.com";
           user = "git";
@@ -24,5 +23,10 @@
           identityFile = authKey;
         };
       };
+
+    };
+
+  home.file = {
+    ".ssh/sockets/.keep".text = "# Managed by home-manager";
   };
 }

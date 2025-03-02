@@ -1,11 +1,14 @@
 keys:
-  - &users:
-    - &wawwior age1m6mszkt83fdx63hqmlgkcc3jm2rtztvxr73fw8nwlk4sdqgh7quqqw5zl5
+  - &wawwior age1m6mszkt83fdx63hqmlgkcc3jm2rtztvxr73fw8nwlk4sdqgh7quqqw5zl5
   - &hosts:
     - &artemis age1j4yy6e7x783c83n3lxvd5fzwlpevnm0fnznmlrg0asawudjfyd0q0664yu
 creation_rules:
   - path_regex: secrets.yaml
     key_groups:
       - age:
-          - *wawwior
           - *artemis
+          - *wawwior
+  - path_regex: keys.yaml
+    key_groups:
+      - age:
+          - *wawwior

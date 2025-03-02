@@ -15,7 +15,6 @@
     ./nh.nix
     ./kernel.nix
     ./nix-conf.nix
-    ./ssh.nix
 
     (map lib.custom.fromTop [
       "modules/common"
@@ -29,7 +28,9 @@
 
   networking.hostName = config.hostSpec.hostName;
 
-  environment.systemPackages = [ pkgs.openssh ];
+  environment.systemPackages = [
+    pkgs.openssh
+  ];
 
   home-manager.backupFileExtension = "bk";
 

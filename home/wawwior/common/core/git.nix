@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   programs.git = {
 
@@ -9,6 +10,8 @@
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
       commit.gpgsign = true;
+      gpg.format = "ssh";
+      user.signingkey = "${config.hostSpec.home}/.ssh/id_sign_ed25519_key.pub";
     };
 
   };

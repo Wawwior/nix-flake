@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   lib,
   ...
 }:
@@ -22,6 +23,7 @@
       "hosts/common/core"
       "hosts/common/optional/services/openssh.nix"
       "hosts/common/optional/services/cpufreq.nix"
+      "hosts/common/optional/services/gnome-keyring.nix"
       "hosts/common/optional/services/thermald.nix"
 
       # PONDER_THE_ORB: is this the best way to do this?
@@ -45,6 +47,7 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  environment.systemPackages = [ pkgs.brightnessctl ];
 
   boot = {
     loader = {
